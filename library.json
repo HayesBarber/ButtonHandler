@@ -1,0 +1,12 @@
+{
+  "name": "ButtonHandler",
+  "version": "0.1.0",
+  "description": "Debounced digital button handling for Arduino/ESP32.",
+  "frameworks": "arduino",
+  "license": "MIT",
+  "platforms": ["espressif32"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HayesBarber/ButtonHandler.git"
+  }
+}

@@ -15,6 +15,7 @@ ButtonHandler simplifies detecting clean button presses by handling debounce log
 ## Usage
 
 ```cpp
+#include <Arduino.h>
 #include <ButtonHandler.h>
 
 Button button;

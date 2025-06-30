@@ -7,3 +7,10 @@ Button::Button()
       _lastDebounceTime(0),
       _debounceDelay(50),
       _callback(nullptr) {}
+
+void Button::init(int pin, void (*callback)(int)) {
+    _pin = pin;
+    _callback = callback;
+    pinMode(_pin, INPUT_PULLUP);
+    Serial.printf("Pin %d is now pulled up and ready for button presses\n", _pin);
+}

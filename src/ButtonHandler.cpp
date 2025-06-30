@@ -14,3 +14,23 @@ void Button::init(int pin, void (*callback)(int)) {
     pinMode(_pin, INPUT_PULLUP);
     Serial.printf("Pin %d is now pulled up and ready for button presses\n", _pin);
 }
+
+void Button::update() {
+    int reading = digitalRead(_pin);
+
+    if (reading != _lastButtonState) {
+        _lastDebounceTime = millis();
+    }
+
+    if ((millis() - _lastDebounceTime) > _debounceDelay) {
+        if (reading != _buttonState) {
+            _buttonState = reading;
+
+            if (_buttonState == LOW) {
+                _callback(_pin);
+            }
+        }
+    }
+
+    _lastButtonState = reading;
+}

@@ -16,7 +16,10 @@ void Button::init(int pin, void (*callback)(int)) {
 }
 
 void Button::update() {
-    if (_pin == -1) return;
+    if (_pin == -1) {
+        Serial.println("ERROR: Button pin not initialized.");
+        abort();
+    }
 
     int reading = digitalRead(_pin);
     unsigned long currentTime = millis();

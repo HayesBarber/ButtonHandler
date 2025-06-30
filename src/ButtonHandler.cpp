@@ -16,19 +16,22 @@ void Button::init(int pin, void (*callback)(int)) {
 }
 
 void Button::update() {
+    if (_pin == -1) return;
+
     int reading = digitalRead(_pin);
+    unsigned long currentTime = millis();
 
     if (reading != _lastButtonState) {
-        _lastDebounceTime = millis();
+        _lastDebounceTime = currentTime;
     }
 
-    if ((millis() - _lastDebounceTime) > _debounceDelay) {
-        if (reading != _buttonState) {
-            _buttonState = reading;
+    bool hasDebounced = (currentTime - _lastDebounceTime) > _debounceDelay;
 
-            if (_buttonState == LOW) {
-                _callback(_pin);
-            }
+    if (hasDebounced && reading != _buttonState) {
+        _buttonState = reading;
+
+        if (_buttonState == LOW) {
+            _callback(_pin);
         }
     }
 
